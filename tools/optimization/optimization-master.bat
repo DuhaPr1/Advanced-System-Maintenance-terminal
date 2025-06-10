@@ -4,19 +4,10 @@ color 0E
 mode con: cols=100 lines=35
 setlocal enabledelayedexpansion
 
-:: Check for admin privileges
-net session >nul 2>&1
-if %errorLevel% neq 0 (
-    echo Administrator privileges required!
-    echo Right-click and select "Run as administrator"
-    pause
-    exit /b
-)
-
-:: Log file setup
-set "log_file=..\..\logs\optimization_log_%date:~-4,4%%date:~-7,2%%date:~-10,2%_%time:~0,2%%time:~3,2%%time:~6,2%.txt"
+call core\animation-utils.bat :INTRO_ANIMATION
+set "log_file=logs\optimization_%date:~-4,4%%date:~-7,2%%date:~-10,2%_%time:~0,2%%time:~3,2%%time:~6,2%.log"
 set "log_file=%log_file: =0%"
-echo Advanced System Optimization - Log started at %date% %time% > "%log_file%"
+echo Optimization Suite - Log started at %date% %time% > "%log_file%"
 echo Created by Abdelhakim Baalla >> "%log_file%"
 echo. >> "%log_file%"
 

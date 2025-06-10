@@ -1,0 +1,1 @@
+Ce dossier contient les scripts principaux et utilitaires centraux (ex: animation-utils.bat) pour la suite Advanced System Maintenance. Placez ici tout script partagé ou essentiel au fonctionnement global.

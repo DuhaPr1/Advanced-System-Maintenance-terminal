@@ -1,18 +1,33 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:SHOW_DEVELOPER_INFO
+:INTRO_ANIMATION
+cls
+color 0B
+setlocal enabledelayedexpansion
+set "frames=| / - \\"
+for /l %%i in (1,1,20) do (
+    set /a idx=%%i %% 4
+    set "frame=!frames:~%idx%,1!"
+    cls
+    echo.
+    echo  ========================================================================
+    echo   Lancement de la suite... !frame!
+    echo  ========================================================================
+    timeout /t 0.1 >nul
+)
+endlocal
+goto :eof
+
+:SHOW_MAIN_MENU
 cls
 color 0A
 echo.
 echo  ========================================================================
-echo                ADVANCED SYSTEM MAINTENANCE SUITE v2.5
-echo                    Developed by: Abdelhakim Baalla
-echo                       Full-Stack Developer
-echo                          Agadir, Morocco
+echo                  ADVANCED SYSTEM MAINTENANCE SUITE v2.5
+echo                        By Abdelhakim Baalla
 echo  ========================================================================
 echo.
-timeout /t 3 >nul
 goto :eof
 
 :MATRIX_ANIMATION

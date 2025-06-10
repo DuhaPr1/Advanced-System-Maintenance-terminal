@@ -4,8 +4,10 @@ color 0F
 mode con: cols=100 lines=35
 setlocal enabledelayedexpansion
 
-call animation-utils.bat :SHOW_DEVELOPER_INFO
-call animation-utils.bat :MATRIX_ANIMATION
+call core\animation-utils.bat :INTRO_ANIMATION
+set "log_file=logs\custom_commands_%date:~-4,4%%date:~-7,2%%date:~-10,2%_%time:~0,2%%time:~3,2%%time:~6,2%.log"
+set "log_file=%log_file: =0%"
+echo Custom Commands Center - Log started at %date% %time% > "%log_file%"
 
 :CUSTOM_MENU
 cls

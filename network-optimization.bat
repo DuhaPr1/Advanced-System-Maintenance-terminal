@@ -4,8 +4,13 @@ color 0B
 mode con: cols=100 lines=35
 setlocal enabledelayedexpansion
 
+call core\animation-utils.bat :INTRO_ANIMATION
 call animation-utils.bat :SHOW_DEVELOPER_INFO
 call animation-utils.bat :SCAN_ANIMATION
+
+set "log_file=logs\network_%date:~-4,4%%date:~-7,2%%date:~-10,2%_%time:~0,2%%time:~3,2%%time:~6,2%.log"
+set "log_file=%log_file: =0%"
+echo Network Optimization - Log started at %date% %time% > "%log_file%"
 
 :NETWORK_MENU
 cls
