@@ -34,21 +34,40 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select gaming optimization option: "
-if /i "%choice%"=="1" call ..\advanced-tools\quick-gaming.bat
-if /i "%choice%"=="2" call ..\advanced-tools\ultimate-gaming.bat
-if /i "%choice%"=="3" call ..\advanced-tools\fps-opt.bat
-if /i "%choice%"=="4" call ..\advanced-tools\input-lag.bat
-if /i "%choice%"=="5" call ..\advanced-tools\gpu-opt.bat
-if /i "%choice%"=="6" call ..\advanced-tools\cpu-priority.bat
-if /i "%choice%"=="7" call ..\advanced-tools\network-latency.bat
-if /i "%choice%"=="8" call ..\advanced-tools\game-specific.bat
-if /i "%choice%"=="9" call ..\advanced-tools\directx-opt.bat
-if /i "%choice%"=="A" call ..\advanced-tools\audio-latency.bat
-if /i "%choice%"=="B" call ..\advanced-tools\launcher-opt.bat
-if /i "%choice%"=="C" call ..\advanced-tools\vr-gaming.bat
-if /i "%choice%"=="D" call ..\advanced-tools\streaming-setup.bat
-if /i "%choice%"=="E" call ..\advanced-tools\gaming-monitor.bat
-if /i "%choice%"=="F" call ..\advanced-tools\restore-defaults.bat
+set "target="
+if /i "%choice%"=="1" set "target=quick-gaming.bat"
+if /i "%choice%"=="2" set "target=ultimate-gaming.bat"
+if /i "%choice%"=="3" set "target=fps-opt.bat"
+if /i "%choice%"=="4" set "target=input-lag.bat"
+if /i "%choice%"=="5" set "target=gpu-opt.bat"
+if /i "%choice%"=="6" set "target=cpu-priority.bat"
+if /i "%choice%"=="7" set "target=network-latency.bat"
+if /i "%choice%"=="8" set "target=game-specific.bat"
+if /i "%choice%"=="9" set "target=directx-opt.bat"
+if /i "%choice%"=="A" set "target=audio-latency.bat"
+if /i "%choice%"=="B" set "target=launcher-opt.bat"
+if /i "%choice%"=="C" set "target=vr-gaming.bat"
+if /i "%choice%"=="D" set "target=streaming-setup.bat"
+if /i "%choice%"=="E" set "target=gaming-monitor.bat"
+if /i "%choice%"=="F" set "target=restore-defaults.bat"
 if /i "%choice%"=="0" exit /b
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto GAMING_MENU

@@ -25,15 +25,34 @@ echo  │  [0] Back to Main Menu                                                
 echo  └───────────────────────────────────────────────────────────────────────────────────────┘
 echo.
 set /p choice="Select security option (0-9): "
-if "%choice%"=="0" exit /b
-if /i "%choice%"=="1" call ..\advanced-tools\privacy-hardening.bat
-if /i "%choice%"=="2" call ..\advanced-tools\defender-opt.bat
-if /i "%choice%"=="3" call ..\advanced-tools\firewall-config.bat
-if /i "%choice%"=="4" call ..\advanced-tools\remove-bloatware.bat
-if /i "%choice%"=="5" call ..\advanced-tools\user-security.bat
-if /i "%choice%"=="6" call ..\advanced-tools\network-security.bat
-if /i "%choice%"=="7" call ..\advanced-tools\file-security.bat
-if /i "%choice%"=="8" call ..\advanced-tools\security-audit.bat
-if /i "%choice%"=="9" call ..\advanced-tools\emergency-lockdown.bat
+set "target="
+if /i "%choice%"=="1" set "target=privacy-hardening.bat"
+if /i "%choice%"=="2" set "target=defender-opt.bat"
+if /i "%choice%"=="3" set "target=firewall-config.bat"
+if /i "%choice%"=="4" set "target=remove-bloatware.bat"
+if /i "%choice%"=="5" set "target=user-security.bat"
+if /i "%choice%"=="6" set "target=network-security.bat"
+if /i "%choice%"=="7" set "target=file-security.bat"
+if /i "%choice%"=="8" set "target=security-audit.bat"
+if /i "%choice%"=="9" set "target=emergency-lockdown.bat"
+if /i "%choice%"=="0" exit /b
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto SECURITY_MENU

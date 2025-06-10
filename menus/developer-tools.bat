@@ -30,22 +30,40 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select developer tool: "
-if /i "%choice%"=="1" call ..\advanced-tools\git-manager.bat
-if /i "%choice%"=="2" call ..\advanced-tools\nodejs-setup.bat
-if /i "%choice%"=="3" call ..\advanced-tools\python-manager.bat
-if /i "%choice%"=="4" call ..\advanced-tools\docker-tools.bat
-if /i "%choice%"=="5" call ..\advanced-tools\database-tools.bat
-if /i "%choice%"=="6" call ..\advanced-tools\api-testing.bat
-if /i "%choice%"=="7" call ..\advanced-tools\code-quality.bat
-if /i "%choice%"=="8" call ..\advanced-tools\build-automation.bat
-if /i "%choice%"=="9" call ..\advanced-tools\env-manager-dev.bat
-if /i "%choice%"=="A" call ..\advanced-tools\package-manager.bat
-if /i "%choice%"=="B" call ..\advanced-tools\dev-server.bat
-if /i "%choice%"=="C" call ..\advanced-tools\code-backup.bat
-if /i "%choice%"=="D" call ..\advanced-tools\performance-profiling.bat
-if /i "%choice%"=="E" call ..\advanced-tools\log-analysis.bat
-if /i "%choice%"=="F" call ..\advanced-tools\dev-utilities.bat
+set "target="
+if /i "%choice%"=="1" set "target=git-manager.bat"
+if /i "%choice%"=="2" set "target=nodejs-setup.bat"
+if /i "%choice%"=="3" set "target=python-manager.bat"
+if /i "%choice%"=="4" set "target=docker-tools.bat"
+if /i "%choice%"=="5" set "target=database-tools.bat"
+if /i "%choice%"=="6" set "target=api-testing.bat"
+if /i "%choice%"=="7" set "target=code-quality.bat"
+if /i "%choice%"=="8" set "target=build-automation.bat"
+if /i "%choice%"=="9" set "target=env-manager-dev.bat"
+if /i "%choice%"=="A" set "target=package-manager.bat"
+if /i "%choice%"=="B" set "target=dev-server.bat"
+if /i "%choice%"=="C" set "target=code-backup.bat"
+if /i "%choice%"=="D" set "target=performance-profiling.bat"
+if /i "%choice%"=="E" set "target=log-analysis.bat"
+if /i "%choice%"=="F" set "target=dev-utilities.bat"
 if /i "%choice%"=="0" exit /b
-REM ...ajoute ici les goto/call pour chaque option si besoin...
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto DEVELOPER_MENU

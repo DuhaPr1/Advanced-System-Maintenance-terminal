@@ -27,15 +27,34 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select backup/recovery option: "
-if /i "%choice%"=="1" call ..\advanced-tools\backup-config.bat
-if /i "%choice%"=="2" call ..\advanced-tools\restore-point.bat
-if /i "%choice%"=="3" call ..\advanced-tools\config-backup.bat
-if /i "%choice%"=="4" call ..\advanced-tools\scheduled-cleanup.bat
-if /i "%choice%"=="5" call ..\advanced-tools\cleanup-analysis.bat
-if /i "%choice%"=="6" call ..\advanced-tools\advanced-disk.bat
-if /i "%choice%"=="7" call ..\advanced-tools\cloud-backup.bat
-if /i "%choice%"=="8" call ..\advanced-tools\file-backup.bat
-if /i "%choice%"=="9" call ..\advanced-tools\emergency-recovery.bat
+set "target="
+if /i "%choice%"=="1" set "target=backup-config.bat"
+if /i "%choice%"=="2" set "target=restore-point.bat"
+if /i "%choice%"=="3" set "target=config-backup.bat"
+if /i "%choice%"=="4" set "target=scheduled-cleanup.bat"
+if /i "%choice%"=="5" set "target=cleanup-analysis.bat"
+if /i "%choice%"=="6" set "target=advanced-disk.bat"
+if /i "%choice%"=="7" set "target=cloud-backup.bat"
+if /i "%choice%"=="8" set "target=file-backup.bat"
+if /i "%choice%"=="9" set "target=emergency-recovery.bat"
 if /i "%choice%"=="0" exit /b
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto BACKUP_MENU

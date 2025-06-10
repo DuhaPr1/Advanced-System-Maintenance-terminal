@@ -30,22 +30,40 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select option: "
-if /i "%choice%"=="1" call ..\advanced-tools\command-history.bat
-if /i "%choice%"=="2" call ..\advanced-tools\ps-creator.bat
-if /i "%choice%"=="3" call ..\advanced-tools\task-manager.bat
-if /i "%choice%"=="4" call ..\advanced-tools\sysinfo-export.bat
-if /i "%choice%"=="5" call ..\advanced-tools\registry-shortcuts.bat
-if /i "%choice%"=="6" call ..\advanced-tools\feature-manager.bat
-if /i "%choice%"=="7" call ..\advanced-tools\service-controller.bat
-if /i "%choice%"=="8" call ..\advanced-tools\env-manager.bat
-if /i "%choice%"=="9" call ..\advanced-tools\cmd-customizer.bat
-if /i "%choice%"=="A" call ..\advanced-tools\ps-profile.bat
-if /i "%choice%"=="B" call ..\advanced-tools\batch-creator.bat
-if /i "%choice%"=="C" call ..\advanced-tools\command-library.bat
-if /i "%choice%"=="D" call ..\advanced-tools\command-executor.bat
-if /i "%choice%"=="E" call ..\advanced-tools\macro-recorder.bat
-if /i "%choice%"=="F" call ..\advanced-tools\favorites-manager.bat
+set "target="
+if /i "%choice%"=="1" set "target=command-history.bat"
+if /i "%choice%"=="2" set "target=ps-creator.bat"
+if /i "%choice%"=="3" set "target=task-manager.bat"
+if /i "%choice%"=="4" set "target=sysinfo-export.bat"
+if /i "%choice%"=="5" set "target=registry-shortcuts.bat"
+if /i "%choice%"=="6" set "target=feature-manager.bat"
+if /i "%choice%"=="7" set "target=service-controller.bat"
+if /i "%choice%"=="8" set "target=env-manager.bat"
+if /i "%choice%"=="9" set "target=cmd-customizer.bat"
+if /i "%choice%"=="A" set "target=ps-profile.bat"
+if /i "%choice%"=="B" set "target=batch-creator.bat"
+if /i "%choice%"=="C" set "target=command-library.bat"
+if /i "%choice%"=="D" set "target=command-executor.bat"
+if /i "%choice%"=="E" set "target=macro-recorder.bat"
+if /i "%choice%"=="F" set "target=favorites-manager.bat"
 if /i "%choice%"=="0" exit /b
-REM ...ajoute ici les goto/call pour chaque option si besoin...
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto CUSTOM_MENU

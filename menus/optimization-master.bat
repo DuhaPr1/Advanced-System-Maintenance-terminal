@@ -34,24 +34,41 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select optimization option: "
-if /i "%choice%"=="1" call ..\advanced-tools\quick-boost.bat
-if /i "%choice%"=="2" call ..\advanced-tools\advanced-opt.bat
-if /i "%choice%"=="3" call ..\advanced-tools\memory-opt.bat
-if /i "%choice%"=="4" call ..\advanced-tools\cpu-opt.bat
-if /i "%choice%"=="5" call ..\advanced-tools\network-opt.bat
-if /i "%choice%"=="6" call ..\advanced-tools\gaming-opt.bat
-if /i "%choice%"=="7" call ..\advanced-tools\power-opt.bat
-if /i "%choice%"=="8" call ..\advanced-tools\startup-opt.bat
-if /i "%choice%"=="9" call ..\advanced-tools\monitoring-setup.bat
-if /i "%choice%"=="A" call ..\advanced-tools\registry-opt.bat
-if /i "%choice%"=="B" call ..\advanced-tools\filesystem-opt.bat
-if /i "%choice%"=="C" call ..\advanced-tools\graphics-opt.bat
-if /i "%choice%"=="D" call ..\advanced-tools\browser-opt.bat
-if /i "%choice%"=="E" call ..\advanced-tools\ssd-opt.bat
-if /i "%choice%"=="F" call ..\advanced-tools\custom-profile.bat
+set "target="
+if /i "%choice%"=="1" set "target=quick-boost.bat"
+if /i "%choice%"=="2" set "target=advanced-opt.bat"
+if /i "%choice%"=="3" set "target=memory-opt.bat"
+if /i "%choice%"=="4" set "target=cpu-opt.bat"
+if /i "%choice%"=="5" set "target=network-opt.bat"
+if /i "%choice%"=="6" set "target=gaming-opt.bat"
+if /i "%choice%"=="7" set "target=power-opt.bat"
+if /i "%choice%"=="8" set "target=startup-opt.bat"
+if /i "%choice%"=="9" set "target=monitoring-setup.bat"
+if /i "%choice%"=="A" set "target=registry-opt.bat"
+if /i "%choice%"=="B" set "target=filesystem-opt.bat"
+if /i "%choice%"=="C" set "target=graphics-opt.bat"
+if /i "%choice%"=="D" set "target=browser-opt.bat"
+if /i "%choice%"=="E" set "target=ssd-opt.bat"
+if /i "%choice%"=="F" set "target=custom-profile.bat"
 if /i "%choice%"=="0" exit /b
 
+if defined target (
+    if exist "../advanced-tools/%target%" (
+        findstr /C:"À compléter" "../advanced-tools/%target%" >nul
+        if errorlevel 1 (
+            call ../advanced-tools/%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ../advanced-tools/%target%
+        pause
+    )
+)
 REM Animation fun avant de réafficher le menu
-call ..\animation-utils.bat :MATRIX_ANIMATION
+call ../animation-utils.bat :MATRIX_ANIMATION
 
 goto OPTIMIZATION_MENU

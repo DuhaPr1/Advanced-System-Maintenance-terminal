@@ -35,23 +35,40 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select cleanup option: "
-if /i "%choice%"=="1" call ..\advanced-tools\quick-cleanup.bat & goto :EOF
-if /i "%choice%"=="2" call ..\advanced-tools\deep-cleanup.bat & goto :EOF
-if /i "%choice%"=="3" call ..\advanced-tools\nuclear-cleanup.bat & goto :EOF
-if /i "%choice%"=="4" call ..\advanced-tools\browser-cleanup.bat & goto :EOF
-if /i "%choice%"=="5" call ..\advanced-tools\store-cleanup.bat & goto :EOF
-if /i "%choice%"=="6" call ..\advanced-tools\update-cleanup.bat & goto :EOF
-if /i "%choice%"=="7" call ..\advanced-tools\logs-cleanup.bat & goto :EOF
-if /i "%choice%"=="8" call ..\advanced-tools\custom-cleanup.bat & goto :EOF
-if /i "%choice%"=="9" call ..\advanced-tools\cleanup-analysis.bat & goto :EOF
-if /i "%choice%"=="A" call ..\advanced-tools\advanced-junk-scanner.bat & goto :EOF
-if /i "%choice%"=="B" call ..\advanced-tools\duplicate-finder.bat & goto :EOF
-if /i "%choice%"=="C" call ..\advanced-tools\large-file-locator.bat & goto :EOF
-if /i "%choice%"=="D" call ..\advanced-tools\old-file-cleanup.bat & goto :EOF
-if /i "%choice%"=="E" call ..\advanced-tools\scheduled-cleanup.bat & goto :EOF
-if /i "%choice%"=="F" call ..\advanced-tools\restore-point-cleanup.bat & goto :EOF
+set "target="
+if /i "%choice%"=="1" set "target=quick-cleanup.bat"
+if /i "%choice%"=="2" set "target=deep-cleanup.bat"
+if /i "%choice%"=="3" set "target=nuclear-cleanup.bat"
+if /i "%choice%"=="4" set "target=browser-cleanup.bat"
+if /i "%choice%"=="5" set "target=store-cleanup.bat"
+if /i "%choice%"=="6" set "target=update-cleanup.bat"
+if /i "%choice%"=="7" set "target=logs-cleanup.bat"
+if /i "%choice%"=="8" set "target=custom-cleanup.bat"
+if /i "%choice%"=="9" set "target=cleanup-analysis.bat"
+if /i "%choice%"=="A" set "target=advanced-junk-scanner.bat"
+if /i "%choice%"=="B" set "target=duplicate-finder.bat"
+if /i "%choice%"=="C" set "target=large-file-locator.bat"
+if /i "%choice%"=="D" set "target=old-file-cleanup.bat"
+if /i "%choice%"=="E" set "target=scheduled-cleanup.bat"
+if /i "%choice%"=="F" set "target=restore-point-cleanup.bat"
 if /i "%choice%"=="0" exit
 
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 REM Animation fun avant de réafficher le menu
 call ..\animation-utils.bat :MATRIX_ANIMATION
 

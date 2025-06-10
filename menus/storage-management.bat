@@ -34,21 +34,40 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select storage option: "
-if /i "%choice%"=="1" call ..\advanced-tools\disk-analysis.bat
-if /i "%choice%"=="2" call ..\advanced-tools\disk-cleanup.bat
-if /i "%choice%"=="3" call ..\advanced-tools\disk-health.bat
-if /i "%choice%"=="4" call ..\advanced-tools\partition-mgmt.bat
-if /i "%choice%"=="5" call ..\advanced-tools\drive-format.bat
-if /i "%choice%"=="6" call ..\advanced-tools\filesystem-opt.bat
-if /i "%choice%"=="7" call ..\advanced-tools\large-file-finder.bat
-if /i "%choice%"=="8" call ..\advanced-tools\duplicate-finder.bat
-if /i "%choice%"=="9" call ..\advanced-tools\defrag.bat
-if /i "%choice%"=="A" call ..\advanced-tools\ssd-opt.bat
-if /i "%choice%"=="B" call ..\advanced-tools\disk-benchmark.bat
-if /i "%choice%"=="C" call ..\advanced-tools\storage-spaces.bat
-if /i "%choice%"=="D" call ..\advanced-tools\backup-config.bat
-if /i "%choice%"=="E" call ..\advanced-tools\disk-encryption.bat
-if /i "%choice%"=="F" call ..\advanced-tools\advanced-storage.bat
+set "target="
+if /i "%choice%"=="1" set "target=disk-analysis.bat"
+if /i "%choice%"=="2" set "target=disk-cleanup.bat"
+if /i "%choice%"=="3" set "target=disk-health.bat"
+if /i "%choice%"=="4" set "target=partition-mgmt.bat"
+if /i "%choice%"=="5" set "target=drive-format.bat"
+if /i "%choice%"=="6" set "target=filesystem-opt.bat"
+if /i "%choice%"=="7" set "target=large-file-finder.bat"
+if /i "%choice%"=="8" set "target=duplicate-finder.bat"
+if /i "%choice%"=="9" set "target=defrag.bat"
+if /i "%choice%"=="A" set "target=ssd-opt.bat"
+if /i "%choice%"=="B" set "target=disk-benchmark.bat"
+if /i "%choice%"=="C" set "target=storage-spaces.bat"
+if /i "%choice%"=="D" set "target=backup-config.bat"
+if /i "%choice%"=="E" set "target=disk-encryption.bat"
+if /i "%choice%"=="F" set "target=advanced-storage.bat"
 if /i "%choice%"=="0" exit /b
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto STORAGE_MENU

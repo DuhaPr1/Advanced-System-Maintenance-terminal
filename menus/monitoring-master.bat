@@ -33,16 +33,34 @@ echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
 set /p choice="Select monitoring option: "
-if /i "%choice%"=="1" call ..\advanced-tools\system-overview.bat
-if /i "%choice%"=="2" call ..\advanced-tools\hardware-info.bat
-if /i "%choice%"=="3" call ..\advanced-tools\performance-monitoring.bat
-if /i "%choice%"=="4" call ..\advanced-tools\resource-usage.bat
-if /i "%choice%"=="5" call ..\advanced-tools\event-log-viewer.bat
-if /i "%choice%"=="6" call ..\advanced-tools\network-monitoring.bat
-if /i "%choice%"=="7" call ..\advanced-tools\process-explorer.bat
-if /i "%choice%"=="8" call ..\advanced-tools\service-status.bat
-if /i "%choice%"=="9" call ..\advanced-tools\export-system-report.bat
+set "target="
+if /i "%choice%"=="1" set "target=system-overview.bat"
+if /i "%choice%"=="2" set "target=hardware-info.bat"
+if /i "%choice%"=="3" set "target=performance-monitoring.bat"
+if /i "%choice%"=="4" set "target=resource-usage.bat"
+if /i "%choice%"=="5" set "target=event-log-viewer.bat"
+if /i "%choice%"=="6" set "target=network-monitoring.bat"
+if /i "%choice%"=="7" set "target=process-explorer.bat"
+if /i "%choice%"=="8" set "target=service-status.bat"
+if /i "%choice%"=="9" set "target=export-system-report.bat"
 if /i "%choice%"=="0" exit /b
-REM ...ajoute ici les goto pour chaque option si besoin...
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto MONITORING_MENU

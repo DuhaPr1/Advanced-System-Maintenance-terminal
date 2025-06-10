@@ -24,16 +24,34 @@ echo  │  [0] Back to Main Menu                                                
 echo  └───────────────────────────────────────────────────────────────────────────────────────┘
 echo.
 set /p choice="Select repair option (0-9): "
-if /i "%choice%"=="1" call ..\advanced-tools\sfc-scan.bat
-if /i "%choice%"=="2" call ..\advanced-tools\dism-repair.bat
-if /i "%choice%"=="3" call ..\advanced-tools\memory-diagnostic.bat
-if /i "%choice%"=="4" call ..\advanced-tools\disk-repair.bat
-if /i "%choice%"=="5" call ..\advanced-tools\restore-point.bat
-if /i "%choice%"=="6" call ..\advanced-tools\network-reset.bat
-if /i "%choice%"=="7" call ..\advanced-tools\health-check.bat
-if /i "%choice%"=="8" call ..\advanced-tools\emergency-recovery.bat
-if /i "%choice%"=="9" call ..\advanced-tools\diagnostic-report.bat
-if "%choice%"=="0" exit /b
-REM ...ajoute ici les goto pour chaque option si besoin...
+set "target="
+if /i "%choice%"=="1" set "target=sfc-scan.bat"
+if /i "%choice%"=="2" set "target=dism-repair.bat"
+if /i "%choice%"=="3" set "target=memory-diagnostic.bat"
+if /i "%choice%"=="4" set "target=disk-repair.bat"
+if /i "%choice%"=="5" set "target=restore-point.bat"
+if /i "%choice%"=="6" set "target=network-reset.bat"
+if /i "%choice%"=="7" set "target=health-check.bat"
+if /i "%choice%"=="8" set "target=emergency-recovery.bat"
+if /i "%choice%"=="9" set "target=diagnostic-report.bat"
+if /i "%choice%"=="0" exit /b
+
+if defined target (
+    if exist "..\advanced-tools\%target%" (
+        findstr /C:"À compléter" "..\advanced-tools\%target%" >nul
+        if errorlevel 1 (
+            call ..\advanced-tools\%target%
+        ) else (
+            echo.
+            echo [ERREUR] Cette fonctionnalité n'est pas encore implémentée.
+            pause
+        )
+    ) else (
+        echo.
+        echo [ERREUR] Le script cible n'existe pas : ..\advanced-tools\%target%
+        pause
+    )
+)
 call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto REPAIR_MENU
