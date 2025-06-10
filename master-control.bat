@@ -1,82 +1,59 @@
 @echo off
-title Advanced System Maintenance Suite - By Abdelhakim Baalla
-mode con: cols=100 lines=35
-color 0A
+title Advanced System Maintenance Suite
+mode con: cols=80 lines=30
 setlocal enabledelayedexpansion
 
-:: Check for admin privileges
-net session >nul 2>&1
-if %errorLevel% neq 0 (
-    echo Administrator privileges required!
-    echo Right-click and select "Run as administrator"
-    pause
-    exit /b
-)
-
-:: Create folder structure if it doesn't exist
-if not exist ".\animations" mkdir ".\animations"
-if not exist ".\tools" mkdir ".\tools"
-if not exist ".\tools\cleanup" mkdir ".\tools\cleanup"
-if not exist ".\tools\optimization" mkdir ".\tools\optimization"
-if not exist ".\tools\security" mkdir ".\tools\security"
-if not exist ".\tools\network" mkdir ".\tools\network"
-if not exist ".\tools\storage" mkdir ".\tools\storage"
-if not exist ".\tools\developer" mkdir ".\tools\developer"
-if not exist ".\tools\advanced" mkdir ".\tools\advanced"
-if not exist ".\tools\custom" mkdir ".\tools\custom"
-if not exist ".\logs" mkdir ".\logs"
-if not exist ".\config" mkdir ".\config"
-
-:: Set path to include our tools
-set "PATH=%PATH%;%~dp0;%~dp0\tools"
-
-:: Lancer l'animation d'accueil avancée
-call .\core\animation-utils.bat :ADVANCED_INTRO
+call animation-utils.bat :SHOW_DEVELOPER_INFO
+call animation-utils.bat :MATRIX_ANIMATION
+call animation-utils.bat :LOADING_BAR
 
 :MAIN_MENU
 cls
 color 0A
-set "session_log=logs\session_%date:~-4,4%%date:~-7,2%%date:~-10,2%_%time:~0,2%%time:~3,2%%time:~6,2%.log"
-set "session_log=%session_log: =0%"
-echo Session started at %date% %time% > "%session_log%"
 echo.
 echo  ========================================================================
-echo                  ADVANCED SYSTEM MAINTENANCE SUITE v2.5
-echo                        By Abdelhakim Baalla
+echo                ADVANCED SYSTEM MAINTENANCE SUITE v2.5
 echo  ========================================================================
 echo.
-echo  [1] Nettoyage Système
-echo  [2] Optimisation Performance
-echo  [3] Sécurité & Vie Privée
-echo  [4] Réparation & Diagnostics
-echo  [5] Gestion Stockage
-echo  [6] Outils Développeur
-echo  [7] Réseau & Internet
-echo  [8] Commandes Personnalisées
-echo  [9] Outils Avancés
-echo  [H] Aide & Documentation
-echo  [C] Astuce du jour
-echo  [Q] Quitter
 echo  ----------------------------------------------------------------
-echo  (Appuyez sur H pour l'aide rapide, C pour une astuce, Q pour quitter)
-set /p main_choice="Sélectionnez une option : "
+echo   [1] Deep System Cleanup
+echo   [2] Performance Optimization
+echo   [3] System Updates Manager
+echo   [4] Security & Privacy Tools
+echo   [5] System Repair & Diagnostics
+echo   [6] System Information & Monitoring
+echo   [7] Gaming Optimization
+echo   [8] Network Optimization
+echo   [9] Storage Management
+echo   [A] Advanced Tools Menu
+echo   [B] Backup & Recovery
+echo   [C] Custom Commands
+echo   [D] Developer Tools
+echo   [0] Exit
+echo  ----------------------------------------------------------------
+echo.
+set /p choice="Select option: "
 
-if /i "%main_choice%"=="1" call tools\cleanup\cleanup-master.bat
-if /i "%main_choice%"=="2" call tools\optimization\optimization-master.bat
-if /i "%main_choice%"=="3" call tools\security\security-master.bat
-if /i "%main_choice%"=="4" call repair-master.bat
-if /i "%main_choice%"=="5" call storage-management.bat
-if /i "%main_choice%"=="6" call tools\developer\developer-tools.bat
-if /i "%main_choice%"=="7" call tools\network\network-master.bat
-if /i "%main_choice%"=="8" call custom-commands.bat
-if /i "%main_choice%"=="9" call advanced-tools.bat
-if /i "%main_choice%"=="H" call tools\help-system.bat
-if /i "%main_choice%"=="C" (
-    echo.
-    echo  Astuce du jour : Sauvegardez régulièrement votre registre Windows avant toute modification système !
-    timeout /t 3 >nul
-    goto MAIN_MENU
-)
-if /i "%main_choice%"=="Q" exit /b
+if /i "%choice%"=="1" call menus\cleanup-master.bat
+if /i "%choice%"=="2" call menus\optimization-master.bat
+if /i "%choice%"=="3" call menus\update-master.bat
+if /i "%choice%"=="4" call menus\security-master.bat
+if /i "%choice%"=="5" call menus\repair-master.bat
+if /i "%choice%"=="6" call menus\monitoring-master.bat
+if /i "%choice%"=="7" call menus\gaming-optimization.bat
+if /i "%choice%"=="8" call menus\network-optimization.bat
+if /i "%choice%"=="9" call menus\storage-management.bat
+if /i "%choice%"=="A" call menus\advanced-tools.bat
+if /i "%choice%"=="B" call menus\backup-recovery.bat
+if /i "%choice%"=="C" call menus\custom-commands.bat
+if /i "%choice%"=="D" call menus\developer-tools.bat
+if /i "%choice%"=="0" goto EXIT
 
 goto MAIN_MENU
+
+:EXIT
+cls
+call animation-utils.bat :TYPING_EFFECT "Thank you for using Advanced System Maintenance Suite!"
+call animation-utils.bat :TYPING_EFFECT "Developed by Abdelhakim Baalla"
+timeout /t 3 >nul
+exit

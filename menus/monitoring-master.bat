@@ -1,0 +1,3 @@
+@echo off
+REM Fichier déplacé depuis la racine
+REM ...le reste du code d'origine...
