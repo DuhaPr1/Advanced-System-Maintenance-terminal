@@ -34,4 +34,5 @@ if /i "%choice%"=="6" call ..\advanced-tools\security-updates.bat
 if /i "%choice%"=="7" call ..\advanced-tools\component-updates.bat
 if /i "%choice%"=="8" call ..\advanced-tools\update-status.bat
 if /i "%choice%"=="9" call ..\advanced-tools\auto-update-config.bat
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto UPDATE_MENU

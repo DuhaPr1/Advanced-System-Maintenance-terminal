@@ -50,5 +50,8 @@ if /i "%choice%"=="D" call ..\advanced-tools\browser-opt.bat
 if /i "%choice%"=="E" call ..\advanced-tools\ssd-opt.bat
 if /i "%choice%"=="F" call ..\advanced-tools\custom-profile.bat
 if /i "%choice%"=="0" exit /b
-REM ...existing code...
+
+REM Animation fun avant de réafficher le menu
+call ..\animation-utils.bat :MATRIX_ANIMATION
+
 goto OPTIMIZATION_MENU

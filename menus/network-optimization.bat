@@ -50,5 +50,5 @@ if /i "%choice%"=="D" call ..\advanced-tools\services-opt.bat
 if /i "%choice%"=="E" call ..\advanced-tools\custom-network.bat
 if /i "%choice%"=="F" call ..\advanced-tools\reset-network.bat
 if /i "%choice%"=="0" exit /b
-REM ...existing code...
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto NETWORK_MENU

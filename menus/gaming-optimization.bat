@@ -48,7 +48,7 @@ if /i "%choice%"=="B" call ..\advanced-tools\launcher-opt.bat
 if /i "%choice%"=="C" call ..\advanced-tools\vr-gaming.bat
 if /i "%choice%"=="D" call ..\advanced-tools\streaming-setup.bat
 if /i "%choice%"=="E" call ..\advanced-tools\gaming-monitor.bat
-if /i "%choice%"=="F" call ..\advanced-tools\restore-default.bat
+if /i "%choice%"=="F" call ..\advanced-tools\restore-defaults.bat
 if /i "%choice%"=="0" exit /b
-REM ...existing code...
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto GAMING_MENU

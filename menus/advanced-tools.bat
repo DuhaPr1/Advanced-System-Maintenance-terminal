@@ -46,4 +46,5 @@ if /i "%choice%"=="D" call ..\advanced-tools\advanced-troubleshoot.bat
 if /i "%choice%"=="E" call ..\advanced-tools\optimization-profiles.bat
 if /i "%choice%"=="F" call ..\advanced-tools\emergency-recovery.bat
 if /i "%choice%"=="0" exit /b
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto ADVANCED_MENU

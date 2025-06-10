@@ -47,4 +47,5 @@ if /i "%choice%"=="E" call ..\advanced-tools\log-analysis.bat
 if /i "%choice%"=="F" call ..\advanced-tools\dev-utilities.bat
 if /i "%choice%"=="0" exit /b
 REM ...ajoute ici les goto/call pour chaque option si besoin...
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto DEVELOPER_MENU

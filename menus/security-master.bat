@@ -35,4 +35,5 @@ if /i "%choice%"=="6" call ..\advanced-tools\network-security.bat
 if /i "%choice%"=="7" call ..\advanced-tools\file-security.bat
 if /i "%choice%"=="8" call ..\advanced-tools\security-audit.bat
 if /i "%choice%"=="9" call ..\advanced-tools\emergency-lockdown.bat
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto SECURITY_MENU

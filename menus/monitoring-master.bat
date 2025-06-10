@@ -44,4 +44,5 @@ if /i "%choice%"=="8" call ..\advanced-tools\service-status.bat
 if /i "%choice%"=="9" call ..\advanced-tools\export-system-report.bat
 if /i "%choice%"=="0" exit /b
 REM ...ajoute ici les goto pour chaque option si besoin...
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto MONITORING_MENU

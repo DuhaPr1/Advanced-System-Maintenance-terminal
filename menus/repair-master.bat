@@ -35,4 +35,5 @@ if /i "%choice%"=="8" call ..\advanced-tools\emergency-recovery.bat
 if /i "%choice%"=="9" call ..\advanced-tools\diagnostic-report.bat
 if "%choice%"=="0" exit /b
 REM ...ajoute ici les goto pour chaque option si besoin...
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto REPAIR_MENU

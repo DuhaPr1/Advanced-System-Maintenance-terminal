@@ -50,5 +50,5 @@ if /i "%choice%"=="D" call ..\advanced-tools\backup-config.bat
 if /i "%choice%"=="E" call ..\advanced-tools\disk-encryption.bat
 if /i "%choice%"=="F" call ..\advanced-tools\advanced-storage.bat
 if /i "%choice%"=="0" exit /b
-REM ...existing code...
+call ..\animation-utils.bat :MATRIX_ANIMATION
 goto STORAGE_MENU
