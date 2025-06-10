@@ -23,7 +23,7 @@ echo  │  [9] Configure Auto-Updates                                           
 echo  │  [0] Back to Main Menu                                                              │
 echo  └───────────────────────────────────────────────────────────────────────────────────────┘
 echo.
-set /p choice="Select update option (0-9): "
+set /p choice=Votre choix : 
 set "target="
 if /i "%choice%"=="1" set "target=windows-updates.bat"
 if /i "%choice%"=="2" set "target=driver-updates.bat"

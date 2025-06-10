@@ -34,7 +34,7 @@ echo   [F] System Restore Point Cleanup
 echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
-set /p choice="Select cleanup option: "
+set /p choice=Votre choix : 
 set "target="
 if /i "%choice%"=="1" set "target=quick-cleanup.bat"
 if /i "%choice%"=="2" set "target=deep-cleanup.bat"

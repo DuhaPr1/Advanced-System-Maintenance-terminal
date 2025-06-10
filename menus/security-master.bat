@@ -24,7 +24,7 @@ echo  │  [9] Emergency Security Lockdown                                      
 echo  │  [0] Back to Main Menu                                                              │
 echo  └───────────────────────────────────────────────────────────────────────────────────────┘
 echo.
-set /p choice="Select security option (0-9): "
+set /p choice=Votre choix : 
 set "target="
 if /i "%choice%"=="1" set "target=privacy-hardening.bat"
 if /i "%choice%"=="2" set "target=defender-opt.bat"

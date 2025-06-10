@@ -26,7 +26,7 @@ echo   [9] Emergency Recovery
 echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
-set /p choice="Select backup/recovery option: "
+set /p choice=Votre choix : 
 set "target="
 if /i "%choice%"=="1" set "target=backup-config.bat"
 if /i "%choice%"=="2" set "target=restore-point.bat"

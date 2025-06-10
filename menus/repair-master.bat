@@ -23,7 +23,7 @@ echo  │  [9] Generate Diagnostic Report                                       
 echo  │  [0] Back to Main Menu                                                              │
 echo  └───────────────────────────────────────────────────────────────────────────────────────┘
 echo.
-set /p choice="Select repair option (0-9): "
+set /p choice=Votre choix : 
 set "target="
 if /i "%choice%"=="1" set "target=sfc-scan.bat"
 if /i "%choice%"=="2" set "target=dism-repair.bat"

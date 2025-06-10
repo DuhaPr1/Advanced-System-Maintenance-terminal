@@ -33,7 +33,7 @@ echo   [F] Restore Default Settings
 echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
-set /p choice="Select gaming optimization option: "
+set /p choice=Votre choix : 
 set "target="
 if /i "%choice%"=="1" set "target=quick-gaming.bat"
 if /i "%choice%"=="2" set "target=ultimate-gaming.bat"

@@ -29,7 +29,7 @@ echo   [F] Development Utilities
 echo   [0] Back to Main Menu
 echo  ----------------------------------------------------------------
 echo.
-set /p choice="Select developer tool: "
+set /p choice=Votre choix : 
 set "target="
 if /i "%choice%"=="1" set "target=git-manager.bat"
 if /i "%choice%"=="2" set "target=nodejs-setup.bat"

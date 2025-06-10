@@ -141,3 +141,18 @@ for %%c in (1 2 3 4 5 6 7 8 9 A B C D E F) do (
 )
 endlocal
 goto :eof
+
+:INTRO_ANIMATION
+REM Animation d'intro moderne
+call "%~dp0intro.bat"
+goto :eof
+
+:EXIT_ANIMATION
+REM Animation de sortie moderne
+call "%~dp0exit.bat"
+goto :eof
+
+:MATRIX_VBS_ANIMATION
+REM Animation Matrix style via VBS
+cscript //nologo "%~dp0matrix.vbs"
+goto :eof
