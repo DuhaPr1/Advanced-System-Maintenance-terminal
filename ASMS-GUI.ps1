@@ -6,6 +6,13 @@ $form.Text = "Advanced System Maintenance Suite"
 $form.Size = New-Object System.Drawing.Size(500, 600)
 $form.StartPosition = "CenterScreen"
 
+# Add a label for feedback (must be defined before Start-Batch)
+$lblStatus = New-Object System.Windows.Forms.Label
+$lblStatus.Text = "Ready."
+$lblStatus.Size = New-Object System.Drawing.Size(480, 30)
+$lblStatus.Location = New-Object System.Drawing.Point(10, 560)
+$lblStatus.ForeColor = 'DarkGreen'
+
 # Fonction utilitaire pour lancer un batch en admin
 function Start-Batch {
     param($batch)
@@ -13,14 +20,14 @@ function Start-Batch {
     if ($result -eq 'Yes') {
         try {
             Start-Process -FilePath "cmd.exe" -ArgumentList "/c $batch" -Verb RunAs
-            $lblStatus.Text = "Launched: $batch"
+            $lblStatus.Invoke([Action] { $lblStatus.Text = "Launched: $batch" })
         }
         catch {
-            $lblStatus.Text = "Failed to launch: $batch"
+            $lblStatus.Invoke([Action] { $lblStatus.Text = "Failed to launch: $batch" })
         }
     }
     else {
-        $lblStatus.Text = "Cancelled: $batch"
+        $lblStatus.Invoke([Action] { $lblStatus.Text = "Cancelled: $batch" })
     }
 }
 
