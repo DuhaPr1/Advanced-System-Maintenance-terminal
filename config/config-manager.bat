@@ -7,32 +7,32 @@ setlocal enabledelayedexpansion
 :: Check for admin privileges
 net session >nul 2>&1
 if %errorLevel% neq 0 (
-echo Administrator privileges required!
-echo Right-click and select "Run as administrator"
-pause
-exit /b
+    echo Administrator privileges required!
+    echo Right-click and select "Run as administrator"
+    pause
+    exit /b
 )
 
 :: Create config file if it doesn't exist
 if not exist "suite_config.ini" (
-echo [General] > suite_config.ini
-echo Version=3.0 >> suite_config.ini
-echo Author=Abdelhakim Baalla >> suite_config.ini
-echo Website=https://abdelhakim-baalla.vercel.app/ >> suite_config.ini
-echo AutoUpdate=true >> suite_config.ini
-echo LogLevel=INFO >> suite_config.ini
-echo. >> suite_config.ini
-echo [Animations] >> suite_config.ini
-echo EnableAnimations=true >> suite_config.ini
-echo AnimationSpeed=normal >> suite_config.ini
-echo. >> suite_config.ini
-echo [Cleanup] >> suite_config.ini
-echo AutoCleanup=false >> suite_config.ini
-echo CleanupSchedule=weekly >> suite_config.ini
-echo. >> suite_config.ini
-echo [Security] >> suite_config.ini
-echo CreateBackups=true >> suite_config.ini
-echo BackupLocation=..\backups >> suite_config.ini
+    echo [General] > suite_config.ini
+    echo Version=3.0 >> suite_config.ini
+    echo Author=Abdelhakim Baalla >> suite_config.ini
+    echo Website=https://abdelhakim-baalla.vercel.app/ >> suite_config.ini
+    echo AutoUpdate=true >> suite_config.ini
+    echo LogLevel=INFO >> suite_config.ini
+    echo. >> suite_config.ini
+    echo [Animations] >> suite_config.ini
+    echo EnableAnimations=true >> suite_config.ini
+    echo AnimationSpeed=normal >> suite_config.ini
+    echo. >> suite_config.ini
+    echo [Cleanup] >> suite_config.ini
+    echo AutoCleanup=false >> suite_config.ini
+    echo CleanupSchedule=weekly >> suite_config.ini
+    echo. >> suite_config.ini
+    echo [Security] >> suite_config.ini
+    echo CreateBackups=true >> suite_config.ini
+    echo BackupLocation=..\backups >> suite_config.ini
 )
 
 :CONFIG_MENU
@@ -64,19 +64,23 @@ echo   [9] Export Configuration
 echo   [A] Import Configuration
 echo   [0] Back to Main Menu
 echo.
+echo  ╔════════════════════════════════════════════════════════════════════════════════╗
+echo  ║  Configuration Status: Loaded                                                  ║
+echo  ╚════════════════════════════════════════════════════════════════════════════════╝
+echo.
 set /p choice="Enter your choice: "
 
-if "%choice%"=="1" goto VIEW_CONFIG
-if "%choice%"=="2" goto ANIMATION_SETTINGS
-if "%choice%"=="3" goto CLEANUP_SETTINGS
-if "%choice%"=="4" goto SECURITY_SETTINGS
-if "%choice%"=="5" goto LOGGING_SETTINGS
-if "%choice%"=="6" goto PERFORMANCE_SETTINGS
-if "%choice%"=="7" goto BACKUP_CONFIG
-if "%choice%"=="8" goto RESET_DEFAULTS
-if "%choice%"=="9" goto EXPORT_CONFIG
+if /i "%choice%"=="1" goto VIEW_CONFIG
+if /i "%choice%"=="2" goto ANIMATION_SETTINGS
+if /i "%choice%"=="3" goto CLEANUP_SETTINGS
+if /i "%choice%"=="4" goto SECURITY_SETTINGS
+if /i "%choice%"=="5" goto LOGGING_SETTINGS
+if /i "%choice%"=="6" goto PERFORMANCE_SETTINGS
+if /i "%choice%"=="7" goto BACKUP_CONFIG
+if /i "%choice%"=="8" goto RESET_DEFAULTS
+if /i "%choice%"=="9" goto EXPORT_CONFIG
 if /i "%choice%"=="A" goto IMPORT_CONFIG
-if "%choice%"=="0" exit /b
+if /i "%choice%"=="0" exit /b
 
 goto CONFIG_MENU
 
@@ -96,6 +100,48 @@ echo Press any key to return to the Configuration Menu...
 pause >nul
 goto CONFIG_MENU
 
+:ANIMATION_SETTINGS
+cls
+echo.
+echo  ╔════════════════════════════════════════════════════════════════════════════════╗
+echo  ║                           ANIMATION SETTINGS                                   ║
+echo  ╚════════════════════════════════════════════════════════════════════════════════╝
+echo.
+echo Current Animation Settings:
+findstr /C:"EnableAnimations" suite_config.ini
+findstr /C:"AnimationSpeed" suite_config.ini
+echo.
+echo [1] Enable/Disable Animations
+echo [2] Change Animation Speed
+echo [3] Test Animations
+echo [0] Back to Configuration Menu
+echo.
+set /p anim_choice=""
+
+if "%anim_choice%"=="1" (
+    echo.
+    echo Enable animations? (Y/N):
+    set /p enable_anim=""
+    if /i "%enable_anim%"=="Y" (
+        powershell -Command "(Get-Content suite_config.ini) -replace 'EnableAnimations=.*', 'EnableAnimations=true' | Set-Content suite_config.ini"
+        echo Animations enabled!
+    ) else (
+        powershell -Command "(Get-Content suite_config.ini) -replace 'EnableAnimations=.*', 'EnableAnimations=false' | Set-Content suite_config.ini"
+        echo Animations disabled!
+    )
+)
+
+if "%anim_choice%"=="3" (
+    echo.
+    echo Testing animations...
+    powershell -Command "$host.UI.RawUI.BackgroundColor = 'Black'; $host.UI.RawUI.ForegroundColor = 'Green'; Write-Host ''; Write-Host ' ANIMATION TEST'; Write-Host ' ============'; Write-Host ''; for ($i = 0; $i -lt 10; $i++) { Write-Host (' > Test animation frame ' + $i) -ForegroundColor Green; Start-Sleep -Milliseconds 200; }; Write-Host ''; Write-Host ' Animation test complete!'; Write-Host '';"
+)
+
+echo.
+echo Press any key to continue...
+pause >nul
+goto ANIMATION_SETTINGS
+
 :RESET_DEFAULTS
 cls
 echo.
@@ -109,29 +155,29 @@ echo.
 set /p confirm="Are you sure you want to reset to defaults? (Y/N): "
 
 if /i "%confirm%"=="Y" (
-echo.
-echo Resetting configuration to defaults...
-
-echo [General] > suite_config.ini
-echo Version=3.0 >> suite_config.ini
-echo Author=Abdelhakim Baalla >> suite_config.ini
-echo Website=https://abdelhakim-baalla.vercel.app/ >> suite_config.ini
-echo AutoUpdate=true >> suite_config.ini
-echo LogLevel=INFO >> suite_config.ini
-echo. >> suite_config.ini
-echo [Animations] >> suite_config.ini
-echo EnableAnimations=true >> suite_config.ini
-echo AnimationSpeed=normal >> suite_config.ini
-echo. >> suite_config.ini
-echo [Cleanup] >> suite_config.ini
-echo AutoCleanup=false >> suite_config.ini
-echo CleanupSchedule=weekly >> suite_config.ini
-echo. >> suite_config.ini
-echo [Security] >> suite_config.ini
-echo CreateBackups=true >> suite_config.ini
-echo BackupLocation=..\backups >> suite_config.ini
-
-echo Configuration reset to defaults successfully!
+    echo.
+    echo Resetting configuration to defaults...
+    
+    echo [General] > suite_config.ini
+    echo Version=3.0 >> suite_config.ini
+    echo Author=Abdelhakim Baalla >> suite_config.ini
+    echo Website=https://abdelhakim-baalla.vercel.app/ >> suite_config.ini
+    echo AutoUpdate=true >> suite_config.ini
+    echo LogLevel=INFO >> suite_config.ini
+    echo. >> suite_config.ini
+    echo [Animations] >> suite_config.ini
+    echo EnableAnimations=true >> suite_config.ini
+    echo AnimationSpeed=normal >> suite_config.ini
+    echo. >> suite_config.ini
+    echo [Cleanup] >> suite_config.ini
+    echo AutoCleanup=false >> suite_config.ini
+    echo CleanupSchedule=weekly >> suite_config.ini
+    echo. >> suite_config.ini
+    echo [Security] >> suite_config.ini
+    echo CreateBackups=true >> suite_config.ini
+    echo BackupLocation=..\backups >> suite_config.ini
+    
+    echo Configuration reset to defaults successfully!
 )
 
 echo.
