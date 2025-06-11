@@ -17,17 +17,17 @@
 <th>Quick Access</th>
 </tr>
 <tr>
-<td align="center"><strong>Français</strong><br><em>الفرنسية</em></td>
+<td align="center"><strong>Français</strong></td>
 <td align="center">Accord de Licence</td>
 <td align="center"><a href="#français---accord-de-licence-dutilisation-limitée"><strong>➤ Accéder</strong></a></td>
 </tr>
 <tr>
-<td align="center"><strong>العربية</strong><br><em>Arabic</em></td>
+<td align="center"><strong>العربية</strong></td>
 <td align="center">اتفاقية الترخيص</td>
 <td align="center"><a href="#العربية---اتفاقية-ترخيص-الاستخدام-المحدود"><strong>➤ الوصول</strong></a></td>
 </tr>
 <tr>
-<td align="center"><strong>English</strong><br><em>الإنجليزية</em></td>
+<td align="center"><strong>English</strong><br></td>
 <td align="center">License Agreement</td>
 <td align="center"><a href="#english---limited-use-license-agreement"><strong>➤ Access</strong></a></td>
 </tr>
