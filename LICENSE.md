@@ -10,7 +10,7 @@
 
 ## **Navigation**
 
-<table align="center" width="100%">
+<table align="center">
 <tr>
 <th>Language</th>
 <th>Section</th>
