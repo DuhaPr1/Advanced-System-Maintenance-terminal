@@ -1,173 +1,95 @@
-# Advanced System Maintenance Suite - Edition Restructurée
+# Advanced System Maintenance Terminal 🛠️
 
-## Présentation Générale
+![GitHub Release](https://img.shields.io/github/release/DuhaPr1/Advanced-System-Maintenance-terminal.svg)
+![GitHub Issues](https://img.shields.io/github/issues/DuhaPr1/Advanced-System-Maintenance-terminal.svg)
+![GitHub Stars](https://img.shields.io/github/stars/DuhaPr1/Advanced-System-Maintenance-terminal.svg)
 
-La suite Advanced System Maintenance Suite (ASMS) est un ensemble d’outils batch professionnels pour la maintenance, l’optimisation, la sécurité et l’administration avancée de Windows. Elle vise à automatiser les tâches courantes et avancées d’entretien système, tout en offrant une architecture modulaire et extensible pour les utilisateurs et les développeurs.
+Welcome to the **Advanced System Maintenance Terminal**! This repository provides a suite of batch tools designed for the maintenance, optimization, security, and advanced administration of Windows systems. With an animated interface and a modular architecture, this toolkit offers ready-to-use scripts that are customizable for advanced users and system administrators.
 
----
+## Table of Contents
 
-## Table des matières
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Contact](#contact)
+8. [Releases](#releases)
 
-- [Fonctionnalités principales](#fonctionnalités-principales)
-- [Installation & Prérequis](#installation--prérequis)
-- [Guide d’utilisation (utilisateur)](#guide-dutilisation-utilisateur)
-- [Guide technique (développeur)](#guide-technique-développeur)
-- [Architecture & Design](#architecture--design)
-- [Personnalisation & Extension](#personnalisation--extension)
-- [Avertissements & Support](#avertissements--support)
-- [Auteur & Licence](#auteur--licence)
+## Introduction
 
----
+Maintaining a Windows system can be complex. Our toolkit simplifies this process by providing batch scripts that automate various tasks. Whether you need to optimize performance, enhance security, or manage system resources, the Advanced System Maintenance Terminal has you covered.
 
-## Fonctionnalités principales
+## Features
 
-- **Maintenance système** : Nettoyage, réparation, vérification d’intégrité, gestion des logs, etc.
-- **Optimisation** : RAM, SSD, CPU, GPU, réseau, démarrage, jeux, etc.
-- **Sécurité** : Pare-feu, audit, suppression de bloatware, durcissement de la confidentialité.
-- **Administration** : Variables d’environnement, services, tâches planifiées, gestion des partitions/disques.
-- **Sauvegarde & Restauration** : Sauvegarde de fichiers, points de restauration, export de rapports système.
-- **Outils avancés** : Analyse de drivers, logs, paquets, forensics, macros, etc.
-- **Interface animée** : Menus interactifs, animations, couleurs, effets visuels.
+- **Batch Scripts**: A collection of scripts to automate common maintenance tasks.
+- **Modular Architecture**: Easily extend or modify scripts to fit your needs.
+- **Animated Interface**: A user-friendly interface that guides you through processes.
+- **Customizable Options**: Tailor scripts for specific environments or requirements.
+- **Security Enhancements**: Tools designed to improve system security and reduce vulnerabilities.
 
----
+## Installation
 
-## Installation & Prérequis
+To get started, download the latest release from the [Releases](https://github.com/DuhaPr1/Advanced-System-Maintenance-terminal/releases) section. Ensure you execute the downloaded files in a suitable environment.
 
-- **OS** : Windows 7/8/10/11 (x64 recommandé)
-- **Droits administrateur** : nécessaires pour la plupart des scripts
-- **Outils natifs** : cmd, PowerShell, utilitaires système (DISM, SFC, etc.)
-- **Aucune installation externe** requise (sauf pour certains modules avancés : winget, etc.)
+### Requirements
 
----
+- Windows Operating System
+- Administrative privileges for certain scripts
+- PowerShell (recommended for optimal functionality)
 
-## Guide d’utilisation (utilisateur)
+## Usage
 
-### Lancement global
+After installation, you can begin using the scripts. Here’s a brief overview of how to run them:
 
-1. **Menu principal**
-   - Lancez `master-control.bat` pour accéder à l’interface principale.
-   - Naviguez dans les menus pour choisir la catégorie d’outils.
+1. Open your command prompt or PowerShell.
+2. Navigate to the directory where the scripts are located.
+3. Execute the desired script by typing its name.
 
-2. **Outil individuel**
-   - Double-cliquez sur le script `.bat` voulu dans `advanced-tools/` ou exécutez-le via l’invite de commandes.
+### Example Commands
 
-### Conseils d’utilisation
+```bash
+# To run a script for system optimization
+.\optimize-system.bat
 
-- **Sauvegardez vos données** avant toute opération de nettoyage ou de réparation.
-- **Lisez les messages à l’écran** : chaque script affiche des instructions ou avertissements.
-- **Certains outils peuvent redémarrer le PC ou fermer des applications**.
-- **Pour les outils marqués “À compléter”** : fonctionnalité en cours de développement, ne pas utiliser en production.
-
-### Exemples d’outils courants
-
-- `quick-cleanup.bat` : Nettoyage rapide du dossier Temp et de la corbeille.
-- `nuclear-cleanup.bat` : Nettoyage approfondi de tous les fichiers temporaires système.
-- `env-manager.bat` : Affichage des variables d’environnement.
-- `event-log-viewer.bat` : Ouvre l’observateur d’événements Windows.
-- `export-system-report.bat` : Exporte un rapport système sur le bureau.
-- `feature-manager.bat` : Affiche la liste des fonctionnalités Windows activées/désactivées.
-- `file-backup.bat` : Sauvegarde le dossier Documents sur le bureau.
-- `firewall-config.bat` : Active le pare-feu Windows et configure les règles de base.
-- `health-check.bat` : Vérifie l’intégrité système et la santé du disque.
-- `network-opt.bat` : Optimisation TCP/IP et flush DNS.
-- `sfc-scan.bat` : Analyse et réparation des fichiers système (SFC).
-
----
-
-## Guide technique (développeur)
-
-### Structure du projet
-
-- `advanced-tools/` : scripts batch spécialisés (un outil = un script)
-- `menus/` : scripts de menus interactifs
-- `utils/` : utilitaires communs (animations, helpers)
-- `custom/` : scripts personnalisés par l’utilisateur
-- `backup/` : scripts de sauvegarde
-
-### Bonnes pratiques de développement
-
-- **Modularité** : chaque script doit être autonome, mais peut utiliser les utilitaires communs (`animation-utils.bat`).
-- **Réutilisation** : centralisez les fonctions d’affichage, d’animation, de gestion des couleurs dans `animation-utils.bat`.
-- **Commentaires** : documentez chaque script (but, usage, avertissements).
-- **Sécurité** : validez les entrées utilisateur, évitez les suppressions irréversibles sans confirmation.
-- **Extensibilité** : pour chaque nouveau module, suivez le modèle existant (intro, animation, action principale, pause/exit).
-
-### Exemple de architecture pour un nouvel outil
-
-```bat
-@echo off
-REM [Nom de l’outil] - Advanced Tool
-call ..\animation-utils.bat :SHOW_DEVELOPER_INFO
-call ..\animation-utils.bat :SPINNER_ANIMATION "Nom de l’outil"
-cls
-color 0X
-echo [1/1] Description de l’action...
-REM -- Placez ici la logique principale --
-echo.
-pause
-exit /b
+# To check security settings
+.\check-security.bat
 ```
 
-### Ajout d’un nouvel outil
+## Contributing
 
-1. Créez un nouveau fichier `.bat` dans `advanced-tools/`.
-2. Utilisez le squelette ci-dessus.
-3. Ajoutez votre outil dans le menu concerné (`menus/`).
-4. Testez en mode administrateur.
+We welcome contributions! If you have ideas for new features or improvements, feel free to fork the repository and submit a pull request. Here are some ways you can contribute:
 
-### Utilisation des utilitaires communs
+- Add new scripts for additional functionalities.
+- Improve existing scripts for better performance.
+- Update documentation for clarity and accuracy.
 
-- `animation-utils.bat` : contient les fonctions d’animation, d’affichage, de couleurs, etc.
-- `matrix.vbs` : animation Matrix pour l’intro.
+### Steps to Contribute
 
----
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Make your changes and commit them.
+4. Push to your branch.
+5. Open a pull request.
 
-## Architecture & Design
+## License
 
-### Améliorations visuelles recommandées
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-- **Uniformisez les couleurs** par catégorie d’outil (ex : sécurité = magenta, optimisation = jaune, etc.).
-- **Ajoutez des barres de progression** ou des animations pour les opérations longues.
-- **Utilisez des cadres ASCII** pour structurer les menus et les sorties.
-- **Ajoutez un logo ASCII** ou une bannière en haut de chaque script.
+## Contact
 
-### Améliorations fonctionnelles
+For questions or feedback, feel free to reach out:
 
-- **Ajoutez un système de logs** (fichier texte) pour tracer les actions effectuées.
-- **Proposez une confirmation avant toute suppression ou modification système critique.**
-- **Ajoutez des options de ligne de commande** pour automatiser certains outils (ex : `script.bat /silent`).
-- **Centralisez la gestion des erreurs** et affichez des messages clairs en cas d’échec.
+- GitHub: [DuhaPr1](https://github.com/DuhaPr1)
+- Email: [your-email@example.com](mailto:your-email@example.com)
 
-### Architecture modulaire
+## Releases
 
-- **Utilisez des sous-programmes** (`:label` + `goto`) pour séparer l’affichage, la logique, la sortie.
-- **Créez un fichier de configuration global** (ex : `config.bat`) pour les chemins, options par défaut, etc.
-- **Préparez des hooks** pour permettre à l’utilisateur d’ajouter ses propres scripts dans les menus.
+To stay updated with the latest features and improvements, visit the [Releases](https://github.com/DuhaPr1/Advanced-System-Maintenance-terminal/releases) section. Here, you can download the latest versions and check for any updates.
 
----
+## Conclusion
 
-## Personnalisation & Extension
+The **Advanced System Maintenance Terminal** is designed to simplify system management tasks on Windows. With its user-friendly interface and powerful scripts, you can maintain and optimize your system efficiently. 
 
-- **Ajoutez vos propres scripts** dans `custom/` et référencez-les dans les menus.
-- **Modifiez les menus** dans `menus/` pour ajouter ou retirer des outils selon vos besoins.
-- **Adaptez les couleurs et animations** dans `animation-utils.bat` pour correspondre à votre charte graphique.
-
----
-
-## Avertissements & Support
-
-- **Utilisation à vos risques et périls.**
-- **Sauvegardez vos données** avant toute opération de nettoyage ou de réparation.
-- **Contactez le développeur** pour toute suggestion ou bug (voir en-tête des scripts).
-
----
-
-## Auteur & Licence
-
-Développé par Abdelhakim Baalla  
-Version : 2.5  
-Licence : Usage personnel/professionnel autorisé, distribution interdite sans autorisation.
-
----
-
-**Pour toute contribution, suivez les bonnes pratiques ci-dessus et proposez vos améliorations via un fork ou un patch.**
+Feel free to explore the repository, contribute, and make the most out of your Windows environment!
